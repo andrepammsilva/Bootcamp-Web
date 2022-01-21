@@ -1,43 +1,41 @@
-const p1 = {
-    score: 0,
-    button: document.querySelector('#p1Button'),
-    display: document.querySelector('#p1Display')
-}
-const p2 = {
-    score: 0,
-    button: document.querySelector('#p2Button'),
-    display: document.querySelector('#p2Display')
-}
-
+const j1Button = document.querySelector('#j1Button');
+const j2Button = document.querySelector('#j2Button');
+const j1Pontos = document.querySelector('#j1Pontos');
+const j2Pontos = document.querySelector('#j2Pontos');
 const resetButton = document.querySelector('#reset');
-const winningScoreSelect = document.querySelector('#playto');
+const MaxScore = document.querySelector('#pontosMax')
+
+
+let j1Score = 0;
+let j2Score = 0;
 let winningScore = 3;
 let isGameOver = false;
 
-function updateScores(player, opponent) {
+
+
+j1Button.addEventListener('click', function () {
     if (!isGameOver) {
-        player.score += 1;
-        if (player.score === winningScore) {
+        j1Score += 1;
+        if (j1Score === winningScore) {
             isGameOver = true;
-            player.display.classList.add('has-text-success');
-            opponent.display.classList.add('has-text-danger');
-            player.button.disabled = true;
-            opponent.button.disabled = true;
+            alert('Jogador 1 Venceu')
         }
-        player.display.textContent = player.score;
+        j1Pontos.textContent = j1Score;
     }
-}
-
-
-p1.button.addEventListener('click', function () {
-    updateScores(p1, p2)
-})
-p2.button.addEventListener('click', function () {
-    updateScores(p2, p1)
 })
 
+j2Button.addEventListener('click', function () {
+    if (!isGameOver) {
+        j2Score += 1;
+        if (j2Score === winningScore) {
+            isGameOver = true;
+            alert('Jogador 2 Venceu')
+        }
+        j2Pontos.textContent = j2Score;
+    }
+})
 
-winningScoreSelect.addEventListener('change', function () {
+MaxScore.addEventListener('change', function () {
     winningScore = parseInt(this.value);
     reset();
 })
@@ -46,10 +44,8 @@ resetButton.addEventListener('click', reset)
 
 function reset() {
     isGameOver = false;
-    for (let p of [p1, p2]) {
-        p.score = 0;
-        p.display.textContent = 0;
-        p.display.classList.remove('has-text-success', 'has-text-danger');
-        p.button.disabled = false;
-    }
+    j1Score = 0;
+    j2Score = 0;
+    j1Pontos.textContent = 0;
+    j2Pontos.textContent = 0;
 }
