@@ -49,3 +49,11 @@ function reset() {
     j1Pontos.textContent = 0;
     j2Pontos.textContent = 0;
 }
+
+
+
+
+
+
+
+
